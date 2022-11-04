@@ -314,4 +314,3 @@ T peekMin(){
   return LinkedList<T>::get(getMin());
 }
 };
-

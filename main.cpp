@@ -1,72 +1,55 @@
- #include <cstddef>
+#include <cstddef>
 #include <iostream>
 #include <time.h>
 #include <algorithm>
-#include <stdlib.h>
-#include <time.h>
+#include <fstream>
+#include <sstream>
+#define NOMBRE_ARCHIVO "bitacora.csv"
 using namespace std;
 #include "lista.h"
 #include "hashtablevd.h"
 #include "bst.h"
 
 
-// Carlos Alberto Mendoza
-// Carlos Damian Suarez
-
-
 int main(int argc, char * argv[]) {
- /*BST<int> bst;
- bst.insert(83);
- bst.insert(50);
- bst.insert(90);
- bst.insert(12);
- bst.insert(1);
- bst.insert(100);
- bst.insert(55);
-
-
-
+    
 
   
- bst.inOrden(); 
- cout<<endl<<"-------------"<<endl;
- bst.postOrden();
- cout<<endl<<"-------------"<<endl;
- bst.preOrden();
- cout<<endl<<"-------------"<<endl;
- cout<<"contiene 1: "<<bst.contains(1)<<endl;
- cout<<"contiene 10: "<<bst.contains(10)<<endl;
- cout<<"contiene 83: "<<bst.contains(83)<<endl;
+  ifstream archivo(NOMBRE_ARCHIVO);
+  string linea;
+  char delimitador = ',';
+  // Leemos la primer línea para descartarla, pues es el encabezado
+  getline(archivo, linea);
+  // Leemos todas las líneas
+  BST<string> bst;  
+  while (getline(archivo, linea)) {
+    stringstream stream(linea); // Convertir la cadena a un  stream
+    string id,first_name,last_name,gender,dob,phone,email,ZIP,city,state;
 
+    // Extraer todos los valores de esa fila
+
+    getline(stream, id, delimitador);
+    getline(stream, first_name, delimitador);
+    getline(stream, last_name, delimitador);
+    getline(stream, gender, delimitador);
+    getline(stream, dob, delimitador);
+    getline(stream, phone, delimitador);
+    getline(stream, email, delimitador);
+    getline(stream, ZIP, delimitador);
+    getline(stream, city, delimitador);
+    getline(stream, state, delimitador);
+    //Persona persona(id, ZIP, first_name, last_name, city);
+
+    //BST
+    bst.insert(city);
+  }
+  //cout << bst << endl;
   
-cout <<"Nodo minimo:" << bst.getMin() << endl;
-cout << "Nodo maximo: " << bst.getMax() << endl;
-cout << "Nodos en el arbol: "<< bst.length() << endl;
-  
-  
-bst.remove(1);
-cout<<endl<<"-------------"<<endl;
-bst.inOrden();
-
-cout <<endl<< "Nodo minimo: " << bst.getMin() << endl;
-
-cout <<endl<< "Altura del arbol: " << bst.getHeight() << endl;
-
-bst.ComparadorHeight();*/
-  
-
-LinkedList<BST<int>> Bosque;
-BST<int> Arbol[10];
-srand (time(NULL));
-for (int i=0 ; i<10 ; i++){
-  for(int o=0; o<15; o++){
-      Arbol[i].insert(rand() % 100 + 1);    
-  }                                         // O(n^2)
-Bosque.addLast(Arbol[i]);
-Arbol->inOrden();
-cout << endl;
-Bosque.get(i).ComparadorHeight();
-cout << endl;
+  cout << "root: " << bst.getroot() << endl;
+  bst.remove("Marina");
+  cout << "root: " << bst.getroot() << endl;
+  bst.ComparadorHeight();
+  //bst.inOrden();
 }
 
-}
+
