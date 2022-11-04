@@ -27,7 +27,7 @@ int main(int argc, char * argv[]) {
     string id,first_name,last_name,gender,dob,phone,email,ZIP,city,state;
 
     // Extraer todos los valores de esa fila
-
+    
     getline(stream, id, delimitador);
     getline(stream, first_name, delimitador);
     getline(stream, last_name, delimitador);
@@ -49,7 +49,6 @@ int main(int argc, char * argv[]) {
   bst.remove("Marina");
   cout << "root: " << bst.getroot() << endl;
   bst.ComparadorHeight();
-  //bst.inOrden();
+  // bst.inOrden();
+  return 0;
 }
-
-
