@@ -1,11 +1,10 @@
 #include <cstddef>
-#include <iostream>
+#include <stddef.h>
 #include <time.h>
 #include <algorithm>
 #include <fstream>
 #include <sstream>
 #define NOMBRE_ARCHIVO "bitacora.csv"
-using namespace std;
 #include "lista.h"
 #include "hashtablevd.h"
 #include "bst.h"

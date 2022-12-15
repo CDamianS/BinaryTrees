@@ -1,3 +1,8 @@
+#include <iostream>
+#include <stddef.h>
+
+using namespace std;
+
 template <typename T> class Node {
 private:
   T data;
@@ -15,8 +20,7 @@ public:
 
 template <typename T> class LinkedList;
 
-template<typename T>
-ostream & operator<< (ostream &, const LinkedList<T> &);
+template <typename T> ostream &operator<<(ostream &, const LinkedList<T> &);
 
 template <typename T> class LinkedList {
 private:
@@ -29,7 +33,7 @@ public:
     head = last = NULL;
     _size = 0;
   }
-friend ostream & operator<< <T>(ostream &, const LinkedList<T> &);
+  friend ostream &operator<< <T>(ostream &, const LinkedList<T> &);
   /*
   Método para agregar un nodo al inicio de la lista.
   */
@@ -109,7 +113,7 @@ friend ostream & operator<< <T>(ostream &, const LinkedList<T> &);
   Método para obtener un elemento que se encuentra en una posición: "index".
   Si index es menor a 0 o mayor al tamaño se lanza exception.
   */
-  T get(int index) const{
+  T get(int index) const {
     if (index < 0 || index > size())
       throw -1;
     Node<T> *temporal = head;
@@ -119,7 +123,7 @@ friend ostream & operator<< <T>(ostream &, const LinkedList<T> &);
     return temporal->data;
   }
 
-  void get(int index, T dato) const{
+  void get(int index, T dato) const {
     if (index < 0 || index > size())
       throw -1;
     Node<T> *temporal = head;
@@ -170,7 +174,7 @@ friend ostream & operator<< <T>(ostream &, const LinkedList<T> &);
       // minimo 2 nodos
       T dato = last->data;
       last = last->previous;
-      //delete last->next;
+      // delete last->next;
       last->next = NULL;
       _size--;
       return dato;
@@ -205,7 +209,7 @@ friend ostream & operator<< <T>(ostream &, const LinkedList<T> &);
       throw -1;
     } else if (index == 0) {
       return remove_front();
-    } else if (index == _size-1) {
+    } else if (index == _size - 1) {
       return remove_last();
     } else {
       Node<T> *aux = head;
@@ -244,73 +248,53 @@ friend ostream & operator<< <T>(ostream &, const LinkedList<T> &);
   }
 };
 
-template<typename T>
-ostream & operator<< (ostream & salida, const LinkedList<T> & lista){
-      for( int  i = 0 ; i < lista.size(); i++){
-        salida << lista.get(i) << " | ";
-      }
+template <typename T>
+ostream &operator<<(ostream &salida, const LinkedList<T> &lista) {
+  for (int i = 0; i < lista.size(); i++) {
+    salida << lista.get(i) << " | ";
+  }
   return salida;
-} 
-    
+}
+
 template <typename T> class Stack : public LinkedList<T> {
 public:
   Stack() : LinkedList<T>() {}
-  void push(T dato){
-    LinkedList<T>::addLast(dato);
-  }
-T pop(){
-  return LinkedList<T>::remove_last();
-}
-T peek(){
-  return LinkedList<T>::getLast();
-}
+  void push(T dato) { LinkedList<T>::addLast(dato); }
+  T pop() { return LinkedList<T>::remove_last(); }
+  T peek() { return LinkedList<T>::getLast(); }
 };
 
 template <typename T> class Queue : public LinkedList<T> {
 public:
   Queue() : LinkedList<T>() {}
-  void enqueue(T dato){
-    LinkedList<T>::addLast(dato);
-  }
-T dequeue(){
-  return LinkedList<T>::remove_front();
-}
-T peek(){
-  return LinkedList<T>::getFirst();
-}
-int getMax(){
-  T maximoDecimusMeridious = LinkedList<T>::getFirst();
-  int posicion = 0;
-  for(int i = 0; i < LinkedList<T>::size(); i++ ){
-    if( LinkedList<T>::get(i) > maximoDecimusMeridious ){
+  void enqueue(T dato) { LinkedList<T>::addLast(dato); }
+  T dequeue() { return LinkedList<T>::remove_front(); }
+  T peek() { return LinkedList<T>::getFirst(); }
+  int getMax() {
+    T maximoDecimusMeridious = LinkedList<T>::getFirst();
+    int posicion = 0;
+    for (int i = 0; i < LinkedList<T>::size(); i++) {
+      if (LinkedList<T>::get(i) > maximoDecimusMeridious) {
         maximoDecimusMeridious = LinkedList<T>::get(i);
         posicion = i;
       }
     }
-  
-  return posicion;
-}
-int getMin(){
-  T minimunDecimusMeridious = LinkedList<T>::getFirst();
-  int posicion = 0;
-  for(int i = 0; i < LinkedList<T>::size(); i++ ){
-    if( LinkedList<T>::get(i) < minimunDecimusMeridious ){
+
+    return posicion;
+  }
+  int getMin() {
+    T minimunDecimusMeridious = LinkedList<T>::getFirst();
+    int posicion = 0;
+    for (int i = 0; i < LinkedList<T>::size(); i++) {
+      if (LinkedList<T>::get(i) < minimunDecimusMeridious) {
         minimunDecimusMeridious = LinkedList<T>::get(i);
         posicion = i;
       }
     }
-  return posicion;
-}
-T dequeueMax(){
-  return LinkedList<T>::remove(getMax());
-}
-T peekMax(){
-  return LinkedList<T>::get(getMax());
-}
-T dequeueMin(){
-  return LinkedList<T>::remove(getMin());
-}
-T peekMin(){
-  return LinkedList<T>::get(getMin());
-}
+    return posicion;
+  }
+  T dequeueMax() { return LinkedList<T>::remove(getMax()); }
+  T peekMax() { return LinkedList<T>::get(getMax()); }
+  T dequeueMin() { return LinkedList<T>::remove(getMin()); }
+  T peekMin() { return LinkedList<T>::get(getMin()); }
 };
